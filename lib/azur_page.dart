@@ -5,7 +5,7 @@ class AzurPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
+    return Center();
   }
 
 }
