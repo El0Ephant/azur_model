@@ -1,3 +1,4 @@
+import 'package:dddemo/azur_page.dart';
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
@@ -33,7 +34,13 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => AzurPage(),
+                ),
+              );
+            },
             child: const Text(
               "Документация",
             ),
@@ -43,10 +50,6 @@ class HomePage extends StatelessWidget {
             child: const Text(
               "Визуализация",
             ),
-          ),
-          ModelViewer(
-            src: 'assets/models/Azur.glb',
-            backgroundColor: Colors.black,
           ),
         ],
       ),
