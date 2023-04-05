@@ -21,29 +21,42 @@ class MyApp extends StatelessWidget {
       home: AzurPage(
         asset: "assets/models/Azur.glb",
         partsMap: {
-          "ИП-3": ()=>MaterialPageRoute(
-            builder: (_) => const PartPage(
-              title: 'Блок "ИП-3"',
-              defaultAsset: "assets/models/IP3.glb",
-              partsMap: {
-                "Индивидуальный модулятор (ИМ)": "assets/models/IP3_1.glb",
-                "Ограничитель частот (ОГР)": "assets/models/IP3_2.glb",
-                "КФпер": "",
-                "Резисторы": "",
-              },
-              schemeImage: "assets/images/ip3_scheme.png",
-              documentation:
-                  ''' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec massa orci, sollicitudin quis purus vel, rutrum interdum nulla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sodales quam non nunc cursus iaculis. Vestibulum ac porttitor lacus. Fusce pulvinar arcu enim, fermentum tincidunt arcu porttitor commodo. Vestibulum sit amet mollis metus, dapibus pharetra sapien. Donec bibendum consequat erat, in congue urna iaculis nec. Suspendisse dolor lacus, elementum ac nibh quis, pellentesque porttitor erat.
-
-                      Vestibulum accumsan massa ac metus sagittis faucibus. Praesent sed orci et tortor semper pharetra id id nibh. Ut imperdiet neque sed feugiat malesuada. Etiam leo nunc, volutpat nec magna vel, placerat mollis lorem. Maecenas id turpis finibus, volutpat sapien a, rutrum diam. Etiam at ultrices sem. Morbi ullamcorper sit amet nisi sed pretium. Sed id venenatis sem. Donec condimentum vel felis et rhoncus. Quisque molestie lorem et augue iaculis, in viverra augue efficitur. Integer ultricies, velit et accumsan efficitur, arcu turpis consequat sem, gravida euismod orci nisl quis elit. In elit tortor, placerat sed elementum consectetur, tempor sit amet diam. Curabitur ac vestibulum velit, in pretium arcu. Nunc mi ex, fringilla a lorem non, vehicula venenatis odio.
-
-                  Ut tempus vitae nulla nec convallis. Duis vel suscipit mauris, ut varius lacus. Donec porttitor molestie ipsum, ac consequat quam blandit eget. Aliquam hendrerit ultrices enim, a aliquet lectus feugiat vel. In ut massa iaculis, imperdiet ligula id, vehicula erat. Ut quam dolor, ultrices non congue a, condimentum non enim. Donec eget enim semper leo tincidunt malesuada. Morbi ornare eros sit amet massa sagittis sodales. Nulla nec gravida nulla. ''',
-            ),
-          ),
+          "ИП-3": () => MaterialPageRoute(
+                builder: (_) => const PartPage(
+                  title: 'Блок "ИП-3"',
+                  defaultAsset: "assets/models/IP3.glb",
+                  partsMap: {
+                    // TODO (фидя) доделать 3D модельки и схемы
+                    "Канальный фильтр": "assets/models/IP3_KF.glb",
+                    "НЧ": "assets/models/IP3_NCh.glb",
+                    "Регулятор": "assets/models/IP3_NCh.glb",
+                    "Усилитель": "assets/models/IP3_UsK.glb",
+                    "Демодулятор (ИД)": "assets/models/IP3_KF.glb",
+                    "Резисторы": "assets/models/IP3_res.glb",
+                  },
+                  microSchemeImage: "assets/images/ip3_micro_schema.png",
+                  // TODO (шиша) сделать динамическую картинку (меняется вместе с 3D моделькой по нажатию на кнопку ниже) + возможность приближения
+                  electricSchemeImage:
+                      "assets/images/micro_schema/ip3_electric_schema.png",
+                  // TODO (шиша) сделать динамическую картинку (меняется вместе с 3D моделькой по нажатию на кнопку ниже) + возможность приближения
+                  documentation:
+                      '''Индивидуальное оборудование тракта приема предназначено для преобразования спектра сигналов в диапазоне частот 132,4 - 143,4 кГц в спектр низкочастотных сигналов в диапазоне частот 0,3-3,4 кГц''',
+                ),
+              ),
           "КНЧО": null,
           "ПЕР": null,
-          "КУ": null,
+          "КУ": null // TODO (Фидя) Дописать заглушки остальных блоков
         },
+        documentation:
+            '''Аппаратура системы передачи П-330-6 предназначена для уплотнения радиорелейных, тропосферных и кабельных линий типа П-296, П-268 и образования шести каналов тональной частоты в диапазоне частот от 4,6 до 31,7 кГц.
+              П-330-6 полностью обеспечивает встречную работу с аппаратурой П-303.
+              Устройств дистанционного питания аппаратура П-330-6 не имеет.
+              Аппаратура предназначена для эксплуатации на узлах связи в условиях изменения температуры от -30 С до +50 С, относительной влажности до 98 %, атмосферного давления не ниже 460 мм ртутного столба.
+              
+              В аппаратуре П-330-6 предусмотрены следующие типы каналов:
+              1. каналы ТЧ с эффективно передаваемой полосой частот 0,3-3,4кГц - 6 каналов;
+              2. канал ШК с эффективно передаваемой полосой частот 12,3-23,4 кГц - 1 канал;
+              3.канал КСС с эффективно передаваемой полосой частот 0,3-2,4кГц - 1 канал.''',
       ),
     );
   }

@@ -5,13 +5,15 @@ class PartPage extends StatefulWidget {
   const PartPage(
       {super.key,
       required this.title,
-      this.schemeImage,
+      this.microSchemeImage,
+      this.electricSchemeImage,
       required this.defaultAsset,
       this.partsMap = const {},
       this.documentation = ""});
 
   final String title;
-  final String? schemeImage;
+  final String? microSchemeImage;
+  final String? electricSchemeImage;
   final String defaultAsset;
   final Map<String, String> partsMap;
   final String documentation;
@@ -121,9 +123,13 @@ class _PartPageState extends State<PartPage> {
                   fontSize: 24,
                 ),
               ),
-              if (widget.schemeImage != null)
+              if (widget.microSchemeImage != null)
                 Image.asset(
-                  widget.schemeImage!,
+                  widget.microSchemeImage!,
+                ),
+              if (widget.electricSchemeImage != null)
+                Image.asset(
+                  widget.electricSchemeImage!,
                 ),
               ListView.builder(
                 shrinkWrap: true,
