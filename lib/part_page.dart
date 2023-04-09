@@ -5,17 +5,21 @@ class PartPage extends StatefulWidget {
   const PartPage(
       {super.key,
       required this.title,
-      this.microSchemeImage,
-      this.electricSchemeImage,
+      required this.defaultMicroScheme,
+      required this.defaultElectricScheme,
       required this.defaultAsset,
       this.partsMap = const {},
+      this.microSchemeMap = const {},
+      this.electricSchemeMap = const {},
       this.documentation = ""});
 
   final String title;
-  final String? microSchemeImage;
-  final String? electricSchemeImage;
+  final String defaultMicroScheme;
+  final String defaultElectricScheme;
   final String defaultAsset;
-  final Map<String, String> partsMap;
+  final Map<String?, String> partsMap;
+  final Map<String?, String> microSchemeMap;
+  final Map<String?, String> electricSchemeMap;
   final String documentation;
 
   @override
@@ -23,7 +27,7 @@ class PartPage extends StatefulWidget {
 }
 
 class _PartPageState extends State<PartPage> {
-  String? currentAsset;
+  String? currentPart;
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +112,10 @@ class _PartPageState extends State<PartPage> {
                           ),
                         ),
                         ModelViewer(
-                          key: ValueKey(currentAsset ?? widget.defaultAsset),
-                          src: currentAsset ?? widget.defaultAsset,
+                          key: ValueKey(widget.partsMap[currentPart] ??
+                              widget.defaultAsset),
+                          src: widget.partsMap[currentPart] ??
+                              widget.defaultAsset,
                           backgroundColor: Colors.black,
                         ),
                       ],
@@ -123,14 +129,21 @@ class _PartPageState extends State<PartPage> {
                   fontSize: 24,
                 ),
               ),
-              if (widget.microSchemeImage != null)
-                Image.asset(
-                  widget.microSchemeImage!,
+              InteractiveViewer(
+                child: Image.asset(
+                  widget.microSchemeMap[currentPart] ??
+                      widget.defaultMicroScheme,
                 ),
-              if (widget.electricSchemeImage != null)
-                Image.asset(
-                  widget.electricSchemeImage!,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              InteractiveViewer(
+                child: Image.asset(
+                  widget.electricSchemeMap[currentPart] ??
+                      widget.defaultElectricScheme,
                 ),
+              ),
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -140,18 +153,19 @@ class _PartPageState extends State<PartPage> {
                     onPressed: () {
                       setState(
                         () {
-                          if (currentAsset != partsAssets[i]) {
-                            currentAsset = partsAssets[i];
+                          if (widget.partsMap[currentPart] != partsAssets[i]) {
+                            currentPart = partsTitles[i];
                           } else {
-                            currentAsset = widget.defaultAsset;
+                            currentPart = null;
                           }
                         },
                       );
                     },
                     style: TextButton.styleFrom(
-                      foregroundColor: currentAsset == partsAssets[i]
-                          ? Colors.red
-                          : Colors.black,
+                      foregroundColor:
+                          widget.partsMap[currentPart] == partsAssets[i]
+                              ? Colors.red
+                              : Colors.black,
                     ),
                     child: Text(
                       "${i + 1}. ${partsTitles[i]}",

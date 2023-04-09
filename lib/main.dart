@@ -10,7 +10,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,11 +33,9 @@ class MyApp extends StatelessWidget {
                     "Демодулятор (ИД)": "assets/models/IP3_KF.glb",
                     "Резисторы": "assets/models/IP3_res.glb",
                   },
-                  microSchemeImage: "assets/images/ip3_micro_schema.png",
-                  // TODO (шиша) сделать динамическую картинку (меняется вместе с 3D моделькой по нажатию на кнопку ниже) + возможность приближения
-                  electricSchemeImage:
-                      "assets/images/micro_schema/ip3_electric_schema.png",
-                  // TODO (шиша) сделать динамическую картинку (меняется вместе с 3D моделькой по нажатию на кнопку ниже) + возможность приближения
+                  defaultMicroScheme: "assets/images/micro_schema/ip3_ms.jpg",
+                  defaultElectricScheme:
+                      "assets/images/electric_schema/ip3_es.jpg",
                   documentation:
                       '''Индивидуальное оборудование тракта приема предназначено для преобразования спектра сигналов в диапазоне частот 132,4 - 143,4 кГц в спектр низкочастотных сигналов в диапазоне частот 0,3-3,4 кГц''',
                 ),
