@@ -18,31 +18,50 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey,
       ),
       home: AzurPage(
-        asset: "assets/models/Azur.glb",
+        asset: "assets/models/AZUR.glb",
         partsMap: {
           "ИП-3": () => MaterialPageRoute(
                 builder: (_) => const PartPage(
                   title: 'Блок "ИП-3"',
                   defaultAsset: "assets/models/IP3.glb",
                   partsMap: {
-                    // TODO (фидя) доделать 3D модельки и схемы
-                    "Канальный фильтр": "assets/models/IP3_KF.glb",
-                    "НЧ": "assets/models/IP3_NCh.glb",
-                    "Регулятор": "assets/models/IP3_NCh.glb",
-                    "Усилитель": "assets/models/IP3_UsK.glb",
-                    "Демодулятор (ИД)": "assets/models/IP3_KF.glb",
+                    "Фильтры КФ": "assets/models/IP3_KF.glb",
+                    "НЧ": "", // TODO Узнать что это
+                    "Усилитель УсК": "assets/models/IP3_US.glb",
                     "Резисторы": "assets/models/IP3_res.glb",
                   },
-                  defaultMicroScheme: "assets/images/micro_schema/ip3_ms.jpg",
-                  defaultElectricScheme:
-                      "assets/images/electric_schema/ip3_es.jpg",
+                  defaultMicroScheme: "assets/images/micro_schema/ip3_ms_main.png",
+                  microSchemeMap: {
+                    "Фильтры КФ": "assets/images/micro_schema/ip3_ms_kf.png",
+                    "НЧ": "", // TODO Узнать что это
+                    "Усилитель УсК": "assets/images/micro_schema/ip3_ms_us.png",
+                    "Резисторы": "assets/images/micro_schema/ip3_ms_res.png",
+                  },
+                  defaultElectricScheme: "assets/images/electric_schema/ip3_es_main.png", // TODO (Миша) не отображается картинка
+                  electricSchemeMap: {
+                    "Фильтры КФ": "assets/images/electric_schema/ip3_es_main.png", // TODO (Миша) не отображается картинка
+                    "НЧ": "", // TODO Узнать что это
+                    "Усилитель УсК": "assets/images/electric_schema/ip3_es_us.png", // TODO (Миша) не отображается картинка
+                    "Резисторы": "assets/images/electric_schema/ip3_es_res.png", // TODO (Миша) не отображается картинка
+                  },
                   documentation:
                       '''Индивидуальное оборудование тракта приема предназначено для преобразования спектра сигналов в диапазоне частот 132,4 - 143,4 кГц в спектр низкочастотных сигналов в диапазоне частот 0,3-3,4 кГц''',
                 ),
               ),
           "КНЧО": null,
+          "ПР-1": null,
+          "ПР-2": null,
+          "Г-1": null,
+          "Г-2": null,
+          "ЗГ": null,
           "ПЕР": null,
-          "КУ": null // TODO (Фидя) Дописать заглушки остальных блоков
+          "ПИТ": null,
+          "СН": null,
+          "ПВУ": null,
+          "КСС": null,
+          "АРУ": null,
+          "ЗИП-3": null,
+          "КУ": null
         },
         documentation:
             '''Аппаратура системы передачи П-330-6 предназначена для уплотнения радиорелейных, тропосферных и кабельных линий типа П-296, П-268 и образования шести каналов тональной частоты в диапазоне частот от 4,6 до 31,7 кГц.
