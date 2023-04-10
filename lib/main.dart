@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
                   electricSchemeMap: {
                     "Фильтры КФ": "assets/images/electric_schema/ip3_es_main.png", // TODO (Миша) не отображается картинка
                     "НЧ": "", // TODO Узнать что это
-                    "Усилитель УсК": "assets/images/electric_schema/ip3_es_us.png", // TODO (Миша) не отображается картинка
-                    "Резисторы": "assets/images/electric_schema/ip3_es_res.png", // TODO (Миша) не отображается картинка
+                    "Усилитель УсК": "assets/images/electric_schema/ip3_es_us.jpg", // TODO (Миша) не отображается картинка
+                    "Резисторы": "assets/images/electric_schema/ip3_es_res.jpg", // TODO (Миша) не отображается картинка
                   },
                   documentation:
                       '''Индивидуальное оборудование тракта приема предназначено для преобразования спектра сигналов в диапазоне частот 132,4 - 143,4 кГц в спектр низкочастотных сигналов в диапазоне частот 0,3-3,4 кГц''',
