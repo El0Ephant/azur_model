@@ -1,0 +1,25 @@
+{
+  "title": "Блок \"ИП-3\"",
+  "defaultAsset": "assets/models/IP3.glb",
+  "partsMap": {
+    "Фильтры КФ": "assets/models/IP3_KF.glb",
+    "НЧ": "",
+    "Усилитель УсК": "assets/models/IP3_US.glb",
+    "Резисторы": "assets/models/IP3_res.glb"
+  },
+  "defaultMicroScheme": "assets/images/micro_schema/ip3_ms_main.png",
+  "microSchemeMap": {
+    "Фильтры КФ": "assets/images/micro_schema/ip3_ms_kf.png",
+    "НЧ": "",
+    "Усилитель УсК": "assets/images/micro_schema/ip3_ms_us.png",
+    "Резисторы": "assets/images/micro_schema/ip3_ms_res.png"
+  },
+  "defaultElectricScheme": "assets/images/electric_schema/ip3_es_main.png",
+  "electricSchemeMap": {
+    "Фильтры КФ": "assets/images/electric_schema/ip3_es_main.png",
+    "НЧ": "",
+    "Усилитель УсК": "assets/images/electric_schema/ip3_es_us.jpg",
+    "Резисторы": "assets/images/electric_schema/ip3_es_res.jpg"
+  },
+  "defaultDocumentation": "Индивидуальное оборудование тракта приема предназначено для преобразования спектра сигналов в диапазоне частот 132,4 - 143,4 кГц в спектр низкочастотных сигналов в диапазоне частот 0,3-3,4 кГц"
+}
