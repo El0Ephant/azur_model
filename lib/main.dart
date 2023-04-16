@@ -1,14 +1,26 @@
+import 'dart:convert';
+
 import 'package:dddemo/azur_page.dart';
+import 'package:dddemo/model/json_provider.dart';
+import 'package:dddemo/model/part_model.dart';
 import 'package:dddemo/part_page.dart';
 import 'package:flutter/material.dart';
-import 'package:model_viewer_plus/model_viewer_plus.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var jsonProvider = JsonProvider();
+  jsonProvider.values["IP3"] =
+      await rootBundle.loadString("assets/json/IP3.json");
+  jsonProvider.values["IP3_repair"] =
+  await rootBundle.loadString("assets/json/IP3_repair.json");
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final jsonProvider = JsonProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -21,31 +33,18 @@ class MyApp extends StatelessWidget {
         asset: "assets/models/AZUR.glb",
         partsMap: {
           "ИП-3": () => MaterialPageRoute(
-                builder: (_) => const PartPage(
-                  title: 'Блок "ИП-3"',
-                  defaultAsset: "assets/models/IP3.glb",
-                  partsMap: {
-                    "Фильтры КФ": "assets/models/IP3_KF.glb",
-                    "НЧ": "", // TODO Узнать что это
-                    "Усилитель УсК": "assets/models/IP3_US.glb",
-                    "Резисторы": "assets/models/IP3_res.glb",
-                  },
-                  defaultMicroScheme: "assets/images/micro_schema/ip3_ms_main.png",
-                  microSchemeMap: {
-                    "Фильтры КФ": "assets/images/micro_schema/ip3_ms_kf.png",
-                    "НЧ": "", // TODO Узнать что это
-                    "Усилитель УсК": "assets/images/micro_schema/ip3_ms_us.png",
-                    "Резисторы": "assets/images/micro_schema/ip3_ms_res.png",
-                  },
-                  defaultElectricScheme: "assets/images/electric_schema/ip3_es_main.png", // TODO (Миша) не отображается картинка
-                  electricSchemeMap: {
-                    "Фильтры КФ": "assets/images/electric_schema/ip3_es_main.png", // TODO (Миша) не отображается картинка
-                    "НЧ": "", // TODO Узнать что это
-                    "Усилитель УсК": "assets/images/electric_schema/ip3_es_us.jpg", // TODO (Миша) не отображается картинка
-                    "Резисторы": "assets/images/electric_schema/ip3_es_res.jpg", // TODO (Миша) не отображается картинка
-                  },
-                  documentation:
-                      '''Индивидуальное оборудование тракта приема предназначено для преобразования спектра сигналов в диапазоне частот 132,4 - 143,4 кГц в спектр низкочастотных сигналов в диапазоне частот 0,3-3,4 кГц''',
+                builder: (_) => PartPage(
+                  model: PartModel.fromJson(
+                    jsonDecode(jsonProvider.values["IP3"]!),
+                  ),
+                  repairRoute: () => MaterialPageRoute(
+                    builder: (_) => PartPage.repair(
+                      model: PartModel.fromJson(
+                        jsonDecode(
+                            jsonProvider.values["IP3_repair"]!),
+                      ),
+                    ),
+                  ),
                 ),
               ),
           "КНЧО": null,

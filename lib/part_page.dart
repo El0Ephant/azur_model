@@ -1,26 +1,22 @@
+import 'package:dddemo/model/part_model.dart';
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class PartPage extends StatefulWidget {
   const PartPage(
       {super.key,
-      required this.title,
-      required this.defaultMicroScheme,
-      required this.defaultElectricScheme,
-      required this.defaultAsset,
-      this.partsMap = const {},
-      this.microSchemeMap = const {},
-      this.electricSchemeMap = const {},
-      this.documentation = ""});
+      required this.model,
+      required MaterialPageRoute Function() repairRoute})
+      : _route = repairRoute,
+        _buttonLabel = "Ремонт";
 
-  final String title;
-  final String defaultMicroScheme;
-  final String defaultElectricScheme;
-  final String defaultAsset;
-  final Map<String?, String> partsMap;
-  final Map<String?, String> microSchemeMap;
-  final Map<String?, String> electricSchemeMap;
-  final String documentation;
+  const PartPage.repair({super.key, required this.model})
+      : _route = null,
+        _buttonLabel = "Обзор";
+
+  final PartModel model;
+  final MaterialPageRoute Function()? _route;
+  final String _buttonLabel;
 
   @override
   State<PartPage> createState() => _PartPageState();
@@ -38,8 +34,8 @@ class _PartPageState extends State<PartPage> {
       color: Colors.black,
     );
     final buttonTheme = ElevatedButton.styleFrom(backgroundColor: Colors.white);
-    final partsTitles = widget.partsMap.keys.toList();
-    final partsAssets = widget.partsMap.values.toList();
+    final partsTitles = widget.model.partsMap.keys.toList();
+    final partsAssets = widget.model.partsMap.values.toList();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -78,7 +74,8 @@ class _PartPageState extends State<PartPage> {
                           ),
                           child: SingleChildScrollView(
                             child: Text(
-                              widget.documentation,
+                                widget.model.documentationMap[currentPart] ??
+                                    widget.model.defaultDocumentation
                             ),
                           ),
                         ),
@@ -91,6 +88,21 @@ class _PartPageState extends State<PartPage> {
                     ),
                   ),
                 ],
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (widget._route != null) {
+                    Navigator.of(context).push(widget._route!());
+                  }
+                  else {
+                    Navigator.pop(context);
+                  }
+                },
+                style: buttonTheme,
+                child: Text(
+                  widget._buttonLabel,
+                  style: buttonText,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -112,10 +124,10 @@ class _PartPageState extends State<PartPage> {
                           ),
                         ),
                         ModelViewer(
-                          key: ValueKey(widget.partsMap[currentPart] ??
-                              widget.defaultAsset),
-                          src: widget.partsMap[currentPart] ??
-                              widget.defaultAsset,
+                          key: ValueKey(widget.model.partsMap[currentPart] ??
+                              widget.model.defaultAsset),
+                          src: widget.model.partsMap[currentPart] ??
+                              widget.model.defaultAsset,
                           backgroundColor: Colors.black,
                         ),
                       ],
@@ -124,15 +136,15 @@ class _PartPageState extends State<PartPage> {
                 ),
               ),
               Text(
-                widget.title,
+                widget.model.title,
                 style: const TextStyle(
                   fontSize: 24,
                 ),
               ),
               InteractiveViewer(
                 child: Image.asset(
-                  widget.microSchemeMap[currentPart] ??
-                      widget.defaultMicroScheme,
+                  widget.model.microSchemeMap[currentPart] ??
+                      widget.model.defaultMicroScheme,
                 ),
               ),
               const SizedBox(
@@ -140,8 +152,8 @@ class _PartPageState extends State<PartPage> {
               ),
               InteractiveViewer(
                 child: Image.asset(
-                  widget.electricSchemeMap[currentPart] ??
-                      widget.defaultElectricScheme,
+                  widget.model.electricSchemeMap[currentPart] ??
+                      widget.model.defaultElectricScheme,
                 ),
               ),
               ListView.builder(
@@ -153,7 +165,8 @@ class _PartPageState extends State<PartPage> {
                     onPressed: () {
                       setState(
                         () {
-                          if (widget.partsMap[currentPart] != partsAssets[i]) {
+                          if (widget.model.partsMap[currentPart] !=
+                              partsAssets[i]) {
                             currentPart = partsTitles[i];
                           } else {
                             currentPart = null;
@@ -163,7 +176,7 @@ class _PartPageState extends State<PartPage> {
                     },
                     style: TextButton.styleFrom(
                       foregroundColor:
-                          widget.partsMap[currentPart] == partsAssets[i]
+                          widget.model.partsMap[currentPart] == partsAssets[i]
                               ? Colors.red
                               : Colors.black,
                     ),
