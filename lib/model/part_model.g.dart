@@ -30,6 +30,10 @@ PartModel _$PartModelFromJson(Map<String, dynamic> json) => PartModel(
                 (k, e) => MapEntry(k, e as String),
               ) ??
               {},
+      defaultElementAsset: json['defaultElementAsset'] as String?,
+      elementPartsMap: (json['elementPartsMap'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
     );
 
 Map<String, dynamic> _$PartModelToJson(PartModel instance) => <String, dynamic>{
@@ -42,4 +46,6 @@ Map<String, dynamic> _$PartModelToJson(PartModel instance) => <String, dynamic>{
       'microSchemeMap': instance.microSchemeMap,
       'electricSchemeMap': instance.electricSchemeMap,
       'documentationMap': instance.documentationMap,
+      'elementPartsMap': instance.elementPartsMap,
+      'defaultElementAsset': instance.defaultElementAsset,
     };

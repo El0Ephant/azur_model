@@ -24,9 +24,11 @@ class PartPage extends StatefulWidget {
 
 class _PartPageState extends State<PartPage> {
   String? currentPart;
+  bool elementToggle = false;
 
   @override
   Widget build(BuildContext context) {
+    print(_defaultAsset(elementToggle));
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     const buttonText = TextStyle(
@@ -75,8 +77,7 @@ class _PartPageState extends State<PartPage> {
                           child: SingleChildScrollView(
                             child: Text(
                                 widget.model.documentationMap[currentPart] ??
-                                    widget.model.defaultDocumentation
-                            ),
+                                    widget.model.defaultDocumentation),
                           ),
                         ),
                       );
@@ -93,8 +94,7 @@ class _PartPageState extends State<PartPage> {
                 onPressed: () {
                   if (widget._route != null) {
                     Navigator.of(context).push(widget._route!());
-                  }
-                  else {
+                  } else {
                     Navigator.pop(context);
                   }
                 },
@@ -104,6 +104,28 @@ class _PartPageState extends State<PartPage> {
                   style: buttonText,
                 ),
               ),
+              if (widget.model.defaultElementAsset != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Плата / Элемент",
+                        style: buttonText,
+                      ),
+                      Switch(
+                        value: elementToggle,
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              elementToggle = val;
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 6,
@@ -124,10 +146,12 @@ class _PartPageState extends State<PartPage> {
                           ),
                         ),
                         ModelViewer(
-                          key: ValueKey(widget.model.partsMap[currentPart] ??
-                              widget.model.defaultAsset),
-                          src: widget.model.partsMap[currentPart] ??
-                              widget.model.defaultAsset,
+                          key: ValueKey(
+                            _mapAsset(elementToggle) ??
+                                _defaultAsset(elementToggle),
+                          ),
+                          src: _mapAsset(elementToggle) ??
+                              _defaultAsset(elementToggle),
                           backgroundColor: Colors.black,
                         ),
                       ],
@@ -195,5 +219,21 @@ class _PartPageState extends State<PartPage> {
         ),
       ),
     );
+  }
+
+  String? _mapAsset(bool toggle) {
+    if (toggle && widget.model.elementPartsMap != null) {
+      return widget.model.elementPartsMap![currentPart];
+    } else {
+      return widget.model.partsMap[currentPart];
+    }
+  }
+
+  String _defaultAsset(bool toggle) {
+    if (toggle && widget.model.defaultElementAsset != null) {
+      return widget.model.defaultElementAsset!;
+    } else {
+      return widget.model.defaultAsset;
+    }
   }
 }

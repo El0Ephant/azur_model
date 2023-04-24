@@ -14,6 +14,8 @@ class PartModel {
     this.microSchemeMap = const {},
     this.electricSchemeMap = const {},
     this.documentationMap = const {},
+    this.defaultElementAsset,
+    this.elementPartsMap,
   });
 
   final String title;
@@ -31,6 +33,9 @@ class PartModel {
   final Map<String, String> electricSchemeMap;
   @JsonKey(defaultValue: {})
   final Map<String, String> documentationMap;
+
+  final Map<String, String>? elementPartsMap;
+  final String? defaultElementAsset;
 
   /// Connect the generated [_$PersonFromJson] function to the `fromJson`
   /// factory.
