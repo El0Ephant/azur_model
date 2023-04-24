@@ -65,8 +65,8 @@ flutter:
      - assets/json/
      - assets/models/
      - assets/images/
-     - assets/images/electric_schema/
-     - assets/images/micro_schema/
+     - assets/images/principal_schema/
+     - assets/images/montage_schema/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
