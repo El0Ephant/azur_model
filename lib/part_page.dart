@@ -1,4 +1,6 @@
 import 'package:dddemo/model/part_model.dart';
+import 'package:dddemo/model/viewer_type.dart';
+import 'package:dddemo/widgets/main_model.dart';
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
@@ -145,14 +147,10 @@ class _PartPageState extends State<PartPage> {
                             color: Colors.red,
                           ),
                         ),
-                        ModelViewer(
-                          key: ValueKey(
-                            _mapAsset(elementToggle) ??
-                                _defaultAsset(elementToggle),
-                          ),
-                          src: _mapAsset(elementToggle) ??
+                        MainModel(
+                          asset: _mapAsset(elementToggle) ??
                               _defaultAsset(elementToggle),
-                          backgroundColor: Colors.black,
+                          viewerType: ViewerTypeMapper.isGlb(elementToggle),
                         ),
                       ],
                     ),

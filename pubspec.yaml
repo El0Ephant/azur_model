@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   model_viewer_plus: ^1.5.0
   modal_bottom_sheet: ^2.1.2
+  flutter_gif: ^0.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +69,7 @@ flutter:
      - assets/images/
      - assets/images/principal_schema/
      - assets/images/montage_schema/
+     - assets/gifs/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
