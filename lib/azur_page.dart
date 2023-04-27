@@ -52,6 +52,7 @@ class AzurPage extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Text(
                           documentation,
+                          textScaleFactor: 1.5,
                         ),
                       ),
                     ),

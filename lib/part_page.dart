@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class PartPage extends StatefulWidget {
-  const PartPage(
-      {super.key,
-      required this.model,
-      required MaterialPageRoute Function() repairRoute})
+  const PartPage({super.key,
+    required this.model,
+    required MaterialPageRoute Function() repairRoute})
       : _route = repairRoute,
         _buttonLabel = "Ремонт";
 
@@ -26,13 +25,19 @@ class PartPage extends StatefulWidget {
 
 class _PartPageState extends State<PartPage> {
   String? currentPart;
-  bool elementToggle = false;
+  bool elementToggle = true;
 
   @override
   Widget build(BuildContext context) {
     print(_defaultAsset(elementToggle));
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    final width = MediaQuery
+        .of(context)
+        .size
+        .width;
     const buttonText = TextStyle(
       fontSize: 24,
       color: Colors.black,
@@ -71,17 +76,19 @@ class _PartPageState extends State<PartPage> {
                           borderRadius: BorderRadius.circular(21),
                         ),
                         context: context,
-                        builder: (BuildContext context) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 30,
-                            horizontal: 20,
-                          ),
-                          child: SingleChildScrollView(
-                            child: Text(
-                                widget.model.documentationMap[currentPart] ??
-                                    widget.model.defaultDocumentation),
-                          ),
-                        ),
+                        builder: (BuildContext context) =>
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 30,
+                                horizontal: 20,
+                              ),
+                              child: SingleChildScrollView(
+                                child: Text(
+                                  widget.model.documentationMap[currentPart] ?? widget.model.defaultDocumentation,
+                                  textScaleFactor: 1.5,
+                                ),
+                              ),
+                            ),
                       );
                     },
                     style: buttonTheme,
@@ -119,7 +126,7 @@ class _PartPageState extends State<PartPage> {
                         value: elementToggle,
                         onChanged: (val) {
                           setState(
-                            () {
+                                () {
                               elementToggle = val;
                             },
                           );
@@ -181,35 +188,36 @@ class _PartPageState extends State<PartPage> {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, i) => Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                    onPressed: () {
-                      setState(
-                        () {
-                          if (widget.model.partsMap[currentPart] !=
-                              partsAssets[i]) {
-                            currentPart = partsTitles[i];
-                          } else {
-                            currentPart = null;
-                          }
+                itemBuilder: (context, i) =>
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextButton(
+                        onPressed: () {
+                          setState(
+                                () {
+                              if (widget.model.partsMap[currentPart] !=
+                                  partsAssets[i]) {
+                                currentPart = partsTitles[i];
+                              } else {
+                                currentPart = null;
+                              }
+                            },
+                          );
                         },
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      foregroundColor:
+                        style: TextButton.styleFrom(
+                          foregroundColor:
                           widget.model.partsMap[currentPart] == partsAssets[i]
                               ? Colors.red
                               : Colors.black,
-                    ),
-                    child: Text(
-                      "${i + 1}. ${partsTitles[i]}",
-                      style: const TextStyle(
-                        fontSize: 24,
+                        ),
+                        child: Text(
+                          "${i + 1}. ${partsTitles[i]}",
+                          style: const TextStyle(
+                            fontSize: 24,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
                 itemCount: partsTitles.length,
               ),
             ],

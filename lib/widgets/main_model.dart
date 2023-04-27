@@ -5,7 +5,7 @@ import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 class MainModel extends StatefulWidget {
   const MainModel(
-      {super.key, required this.asset, this.viewerType = ViewerType.gif});
+      {super.key, required this.asset, this.viewerType = ViewerType.glb});
 
   final String asset;
   final ViewerType viewerType;
@@ -23,8 +23,8 @@ class _MainModelState extends State<MainModel> with TickerProviderStateMixin {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       gifController.repeat(
         min: 0,
-        max: 46,
-        period: const Duration(milliseconds: 3000),
+        max: 2,
+        period: const Duration(milliseconds: 1000),
       );
     });
     super.initState();
